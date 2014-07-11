@@ -270,6 +270,10 @@
 		public function checkPostFieldData($data, &$message, $entry_id=NULL){
 			$message = __("'%s' is a required field.", array($this->get('label')));
 
+			if(!is_array($data) && $json = json_decode($data, true)){
+				$data = json[0];
+			}
+
 			$schema = json_decode($this->get('schema'));
 
 			$sampling = $schema[0]->handle;
@@ -373,6 +377,9 @@
 		/* * * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#processRawFieldData * * */
 		function processRawFieldData($data, &$status, &$message=null, $simulate=false, $entry_id=null) {
 			$status = self::__OK__;
+			if(!is_array($data) && $json = json_decode($data, true)){
+				$data = $json[0];
+			}
 			if(!is_array($data)) return NULL;
 
 			$result = array();
