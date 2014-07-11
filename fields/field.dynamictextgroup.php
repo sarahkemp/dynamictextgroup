@@ -271,7 +271,7 @@
 			$message = __("'%s' is a required field.", array($this->get('label')));
 
 			if(!is_array($data) && $json = json_decode($data, true)){
-				$data = json[0];
+				$data = $json[0];
 			}
 
 			$schema = json_decode($this->get('schema'));
